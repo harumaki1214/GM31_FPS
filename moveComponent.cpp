@@ -24,7 +24,7 @@ void MoveComponent::Update()
 	m_Owner->SetQuaternion(q);
 
 	D3DXVECTOR3 pos = m_Owner->GetPosition();
-	pos += m_Owner->GetForward() * m_ForwardSpeed;
+	//pos += m_Owner->GetForward() * m_ForwardSpeed;
 	pos += m_Owner->GetRight() * m_StrafeSpeed;
 	//pos += m_Owner->GetUp() * m_UpSpeed;
 	m_Owner->SetPosition(pos);

@@ -50,18 +50,19 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		//ウィンドウを作成
 		g_Window = CreateWindowEx(0, CLASS_NAME, WINDOW_NAME, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
 			rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance, nullptr);
+
+		//マウスをウィンドウ内にロック
+		SetCapture(g_Window);
 	}
 
 
 
 	Manager::Init();
 	Mouse_Initialize(g_Window);
-	
 
 
 	ShowWindow(g_Window, nCmdShow);
 	UpdateWindow(g_Window);
-
 
 
 	DWORD dwExecLastTime;
@@ -69,7 +70,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	timeBeginPeriod(1);
 	dwExecLastTime = timeGetTime();
 	dwCurrentTime = 0;
-
 
 
 	MSG msg;
@@ -133,6 +133,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_ACTIVATEAPP:
 	case WM_INPUT:
 	case WM_MOUSEMOVE:
+		// マウスカーソルの位置をウィンドウ内に制限する
+		POINT cursorPos;
+		GetCursorPos(&cursorPos);
+		ScreenToClient(hWnd, &cursorPos);
+
 	case WM_LBUTTONDOWN:
 	case WM_LBUTTONUP:
 	case WM_RBUTTONDOWN:
