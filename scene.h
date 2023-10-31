@@ -77,7 +77,6 @@ public:
 					return (T*)object;
 				}
 			}
-			
 		}
 		return  nullptr;
 	}
@@ -101,6 +100,5 @@ public:
 			}
 			return  objects;
 		}
-		
 	}
 };

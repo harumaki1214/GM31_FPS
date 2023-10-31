@@ -65,7 +65,6 @@ void Game::Update()
 {
 	Scene::Update();
 
-
 	Score* score = GetGameObject<Score>();
 	if (score->GetCount() >= 9)
 	{
